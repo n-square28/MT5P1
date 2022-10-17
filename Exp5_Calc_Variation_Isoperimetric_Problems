@@ -1,0 +1,18 @@
+from sympy import Function, diff, dsolve, integrate, pprint, solve
+from sympy.abc import x,k
+
+def iso(f,g,int_g,bc,ll,ul):
+    h = f + k*g
+    euler= diff(h,y1,x)-diff(h,y(x))
+    sol = dsolve(euler, ics=bc)
+    integral = integrate(sol.rhs,(x,ll,ul))
+    final = solve(integral-int_g,k)
+    fun = sol.rhs.subs(k,final[0])
+    pprint(fun)
+    #print("\n")
+    
+y=Function('y')
+y1 = y(x).diff()  
+iso(y1**2,y(x),1,{y(0):0,y(2):1},0,2)
+iso(y1**2,y(x),36,{y(1):3,y(4):24},1,4)
+iso(x+y1**2,y(x),1,{y(0):0,y(1):1},0,1)
