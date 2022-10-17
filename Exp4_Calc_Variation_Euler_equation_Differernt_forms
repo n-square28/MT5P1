@@ -1,0 +1,26 @@
+from sympy import Function, diff, dsolve, sin, pi, sqrt,cos, pprint, simplify
+from sympy.abc import x,k
+
+def euler_forms(F):
+    if diff(F,y(x))==0:
+        print("The integrand is independent of y.")
+        sol = dsolve((diff(F,y1)-k),y(x))
+        print("solution to the extremal problem is")
+        pprint(sol)
+    elif diff(F,y1)==0:
+        print("The integrand is independent of dy/dx.")
+        sol = dsolve((diff(F,y(x))),y(x))
+        print("solution to the extremal problem is = ")
+        pprint(simplify(sol[0]))
+    elif diff(F.subs(y(x),1),x)==0:
+        print("The integrand is independent of x.")
+        sol = dsolve((y1*diff(F,y1)-F-k),y(x))
+        print("solution to the extremal problem is")
+        pprint(sol[2])
+    else:
+        print("didn't enter anything")
+        
+y=Function('y')
+y1 = y(x).diff()
+euler_forms(sqrt(y(x)*(1+y1**2)))
+
