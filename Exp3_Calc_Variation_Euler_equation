@@ -1,0 +1,13 @@
+from sympy import symbols, Function, diff, dsolve, sin, pi, exp
+from numpy import e
+from sympy.abc import x
+
+def euler_eqn(F,bc):
+    y=Function('y')
+    y1 = y(x).diff()
+    euler= diff(F,y1,x)-diff(F,y(x))
+    sol = dsolve(euler, ics=bc)
+    print(sol.rhs)
+euler_eqn(12*x*y(x)+(y1)**2,{y(0):3,y(1):6})
+euler_eqn(2*sin(x)*y(x)+(y1)**2,{y(0):0,y(pi):0})
+euler_eqn(y1**2+2*y(x)*exp(x)+y(x)**2,{y(0):0,y(1):1/(2*e)})
