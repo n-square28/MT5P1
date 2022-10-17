@@ -1,0 +1,28 @@
+def multmod(x,y,n):
+    return (x*y)%n
+
+def comm(R,n):            
+    noncom={(x,y) for x in R for y in R if multmod(y,x,n)!=multmod(x,y,n)}
+    if noncom:
+        print("The ring is not commutative")
+    else:
+        print("The ring is commutative")
+    mult_iden(R,n)
+    
+def mult_iden(R,n):
+    for x in R:
+        mult={y for y in R if multmod(y,x,n)!=y}
+        if not mult:
+            print("The unity is",x,"\n")
+            return
+    print("The ring has no multiplicative identity\n")
+comm({0,2,4,6},8)
+
+        
+comm({0,2,4},6)
+
+comm({0,2,4,6,8},10)
+
+        
+        
+        
